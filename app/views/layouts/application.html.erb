@@ -9,19 +9,76 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand p-3" href="/">Bookers</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+       <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+
+            <% if user_signed_in? %>
+              <li class="nav-item mr-2">
+                <%= link_to user_path(current_user.id) do %>
+                  <h6 class="text-white"><span class="fas fa-home mr-1"></span>Home</h6>
+                <% end %>
+              </li>
+              <li class="nav-item mr-2">
+                <%= link_to users_path do %>
+                  <h6 class="text-white"><span class="fas fa-users mr-1"></span>Users</h6>
+                <% end %>
+              </li>
+              <li class="nav-item mr-2">
+                <%= link_to books_path do %>
+                  <h6 class="text-white"><span class="fas fa-book-open mr-1"></span>Books</h6>
+                <% end %>
+              </li>
+              <li class="nav-item mr-2">
+                <%= link_to destroy_user_session_path, method: :delete do %>
+                  <h6 class="text-white"><span class="fas fa-sign-out-alt"></span>logout</h6>
+                <% end %>
+              </li>
+            <% else %>
+              <li class="nav-item mr-2">
+                <%= link_to root_path do %>
+                  <h6 class="text-white"><span class="fas fa-home mr-1"></span>Home</h6>
+                <% end %>
+              </li>
+              <li class="nav-item mr-2">
+                <%= link_to about_path do %>
+                  <h6 class="text-white"><span class="fas fa-link  mr-1"></span>About</h6>
+                <% end %>
+              </li>
+              <li class="nav-item mr-2">
+                <%= link_to new_user_registration_path do %>
+                  <h6 class="text-white"><span class="fas fa-user-plus mr-1"></span>sign up</h6>
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to new_user_session_path do %>
+                  <h6 class="text-white"><span class="fas fa-sign-in-alt mr-1"></span>log in</h6>
+                <% end %>
+              </li>
+            <% end %>
+         </div>
+      </div>
+    </nav>
+  </header>
+
   <body>
-    <% if user_signed_in? %>
-      <li>
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-      </li>
-    <% else %>
-      <li>
-        <%= link_to "新規登録", new_user_registration_path %>
-      </li>
-      <li>
-        <%= link_to "ログイン", new_user_session_path %>
-      </li>
-    <% end %>    
-    <%= yield %>
+    <div class="container">
+  　   <%= render 'layouts/notifications' %>
+      <%= yield %>
+    </div>
   </body>
+
+  <footer class="container mt-5">
+    <div class="row">
+      <div class="col-12 text-center">
+      <p>CopyRight Infratop.inc</p>
+      </div>
+    </div>
+  </footer>
 </html>

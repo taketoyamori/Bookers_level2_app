@@ -1,2 +1,26 @@
-<h1>Home#top</h1>
-<p>Find me in app/views/home/top.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-6 m-auto">
+
+       <h1>welcome to <span class="fas fa-book"></span>Bookers!!</h1>
+
+       <p>In<span class="fas fa-book"></span>Bookers,</P>
+
+       <p>
+         you can share and exchange your opinions,inpressions,and emotions
+       </p>
+
+       <p>about various books!</p>
+
+       <button type="button" class="btn btn-success d-block w-75 m-auto">
+         <%= link_to "Log in", new_user_session_path, class: "text-white" %>
+       </button>
+       
+       <button type="button" class="btn btn-primary d-block w-75 mt-3 mr-auto ml-auto">
+         <%= link_to "Sign in", new_user_registration_path, class: "text-white" %>
+       </button>
+
+    </div>
+  </div>
+</div>
+

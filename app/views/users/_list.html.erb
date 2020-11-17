@@ -1,0 +1,47 @@
+<% if @book.errors.any? %>
+    <div class="text-danger">
+      <h2><%= pluralize(@book.errors.count, "error") %> prohibited this obj from being saved:</h2>
+
+      <ul>
+        <% @book.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
+<div>
+  <h1>User info</h1>
+  <%= attachment_image_tag user, :profile_image, fallback: "no_image.jpg", size: "100x100" %>
+<table class= "table">
+  <tr>
+    <th>name</th>
+    <td><%= user.name %></td>
+  </tr>
+  <tr>
+    <th>introduction</th>
+    <td><%= user.introduction %></td>
+  </tr>
+</table>
+  <div>
+    <% if user.id == current_user.id %>
+          <td>
+            <%= link_to "User情報編集", edit_user_path(current_user.id) %>
+          </td>
+    <% else %>
+          <td>
+            <%= link_to "User情報編集", user_path(current_user.id) %>
+          </td>
+    <% end %>
+  </div>
+
+  <div>
+   <h1>New book</h1>
+   <%= form_with model: @book, local:true do |f| %>
+   <h4>title</h4>
+   <%= f.text_field :title, class: "form-control input-lg" %>
+   <h4>Opinion</h4>
+   <%= f.text_area :body, class: "form-control input-lg" %>
+   <%= f.submit 'Create Book', class: "btn btn-success  d-block mt-3" %>
+   <% end %>
+  </div>
+</div>
